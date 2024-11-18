@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for live-stock
+name: CI/CD Pipeline for detection of endangered animals
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set region us-east-2  # Replace with your region
+          aws configure set region us-east-1  # Replace with your region
 
       # Step 3: Log in to AWS ECR
       - name: Log in to AWS ECR
