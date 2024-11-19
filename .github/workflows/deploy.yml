@@ -52,8 +52,8 @@ jobs:
       - name: Build and Push Docker image
         run: |
           docker build -t endengered-animals .
-          docker tag endengered-animals:latest 825765397104.dkr.ecr.us-east-1.amazonaws.com/endengered-animals
-          docker push 825765397104.dkr.ecr.us-east-1.amazonaws.com/endengered-animals:latest
+          docker tag endengered:latest 825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered
+          docker push 825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered:latest
 
   # Continuous Deployment
   deploy_to_ec2:
@@ -97,16 +97,16 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@3.80.69.74 << EOF
             # Stop and remove any running container on port 8080
-            CONTAINER_ID=$(sudo docker ps -q -f "ancestor=825765397104.dkr.ecr.us-east-1.amazonaws.com/endengered-animals:latest")
+            CONTAINER_ID=$(sudo docker ps -q -f "ancestor=825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered:latest")
             if [ ! -z "$CONTAINER_ID" ]; then
               sudo docker stop $CONTAINER_ID
               sudo docker rm $CONTAINER_ID
             else
-              echo "No running container found with endengered-animals image."
+              echo "No running container found with endengered image."
             fi
 
             # Optionally remove old images if needed
-            IMAGE_ID=$(sudo docker images -q 825765397104.dkr.ecr.us-east-1.amazonaws.com/endengered-animals:latest)
+            IMAGE_ID=$(sudo docker images -q 825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered:latest)
             if [ ! -z "$IMAGE_ID" ]; then
               sudo docker rmi $IMAGE_ID
             else
@@ -114,13 +114,13 @@ jobs:
             fi
 
             # Login to AWS ECR
-            aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 825765397104.dkr.ecr.us-east-1.amazonaws.com
+            aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered
             
             # Pull the Docker image from ECR
-            sudo docker pull 825765397104.dkr.ecr.us-east-1.amazonaws.com/endengered-animals
+            sudo docker pull 825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered
 
             # Run the Docker container on EC2
-            sudo docker run -d -p 8080:8080 825765397104.dkr.ecr.us-east-1.amazonaws.com/endengered-animals:latest
+            sudo docker run -d -p 8080:8080 825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered:latest
           EOF
 
       # Optional: Check the running container logs (for debugging purposes)
