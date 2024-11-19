@@ -51,7 +51,7 @@ jobs:
       # Step 4: Build and push Docker image to AWS ECR
       - name: Build and Push Docker image
         run: |
-          docker build -t live-stock .
+          docker build -t lendengered-animals .
           docker tag endengered-animals:latest 825765397104.dkr.ecr.us-east-1.amazonaws.com/endengered-animals
           docker push 825765397104.dkr.ecr.us-east-1.amazonaws.com/endengered-animals:latest
 
