@@ -89,7 +89,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ubuntu@18.224.8.43 << EOF
             aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws configure set region us-east-2  # Replace with your region
+            aws configure set region us-east-1 # Replace with your region
           EOF
 
       # Step 5: Deploy to EC2 instance
