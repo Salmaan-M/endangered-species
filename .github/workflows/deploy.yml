@@ -74,7 +74,7 @@ jobs:
       # Step 3: Install Docker on EC2 (if not installed already)
       - name: Install Docker
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@34.227.86.66 << EOF
+          ssh -o StrictHostKeyChecking=no ubuntu@3.80.69.74 << EOF
             # Update and install Docker if not already installed
             sudo apt-get update
             sudo apt-get install -y docker.io
@@ -86,7 +86,7 @@ jobs:
       # Step 4: Configure AWS CLI on EC2
       - name: Configure AWS CLI
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@34.227.86.66 << EOF
+          ssh -o StrictHostKeyChecking=no ubuntu@3.80.69.74 << EOF
             aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws configure set region us-east-1 # Replace with your region
@@ -95,7 +95,7 @@ jobs:
       # Step 5: Deploy to EC2 instance
       - name: Deploy to EC2 instance
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@34.227.86.66 << EOF
+          ssh -o StrictHostKeyChecking=no ubuntu@3.80.69.74 << EOF
             # Stop and remove any running container on port 8080
             CONTAINER_ID=$(sudo docker ps -q -f "ancestor=825765397104.dkr.ecr.us-east-1.amazonaws.com/endengered-animals:latest")
             if [ ! -z "$CONTAINER_ID" ]; then
@@ -126,6 +126,6 @@ jobs:
       # Optional: Check the running container logs (for debugging purposes)
       - name: Check Docker container logs
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@34.227.86.66 << EOF
+          ssh -o StrictHostKeyChecking=no ubuntu@3.80.69.74 << EOF
             sudo docker ps
           EOF
