@@ -120,7 +120,7 @@ jobs:
             sudo docker pull 825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered
 
             # Run the Docker container on EC2
-            sudo docker run -d -p 8080:8080 825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered:latest
+            sudo docker run -d -p 8081:8080 825765397104.dkr.ecr.us-east-1.amazonaws.com/endangered:latest
           EOF
 
       # Optional: Check the running container logs (for debugging purposes)
