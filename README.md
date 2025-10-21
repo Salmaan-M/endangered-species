@@ -3,6 +3,9 @@
 
 An AI-powered system for detecting endangered species such as lions, tigers, nilgiri tahrs, elephants, and leopards. Developed to support wildlife conservation efforts by leveraging cutting-edge machine learning and cloud technologies.
 
+## Working
+-[Video](https://www.linkedin.com/posts/salmaan-m_machinelearning-aws-docker-activity-7265771823848407042-ZcY4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD1_7VEBXEFJFYX1496NyxlkbEVzNq1Csfs)
+
 ## Features
 - **Image Annotation:** Accurate labeling with LabelImg.
 - **Model Training:** Deep learning with Jupyter Notebook and Google Colab.
